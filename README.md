@@ -1,4 +1,4 @@
-# fullcycle_go
+# FullCycle + Go
 
 ### Docker + Go Challenge for the FullCycle bootcamp
 
