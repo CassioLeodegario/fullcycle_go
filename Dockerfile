@@ -1,14 +1,15 @@
-FROM golang:1.16.0-alpine3.13
+FROM golang:1.16.0-alpine3.13 as app
 
 WORKDIR /app
 
-COPY fullcycle.go /app
+COPY . .
 
-RUN go build fullcycle.go
+RUN go build -ldflags "-s -w" fullcycle.go
 
-FROM alpine:3.13
+FROM scratch
 
-COPY --from=0 "/app/fullcycle" fullcycle
+WORKDIR /app
 
-ENTRYPOINT ./fullcycle
+COPY --from=app /app ./
 
+ENTRYPOINT [ "./fullcycle" ]
